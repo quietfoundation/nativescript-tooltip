@@ -9,8 +9,8 @@
     }
   },
   "dependencies": {
-    "nativescript-unit-test-runner": "^0.3.0",
     "nativescript-tooltip": "file:..",
+    "nativescript-unit-test-runner": "^0.3.0",
     "tns-core-modules": "^2.3.0"
   },
   "devDependencies": {
