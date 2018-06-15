@@ -1,0 +1,37 @@
+{
+  "name": "nativescript-tooltip",
+  "version": "2.1.2",
+  "description": "NativeScript plugin to create tooltips",
+  "main": "tooltip",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "2.3.0",
+      "ios": "2.3.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/triniwiz/nativescript-tooltip.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "Android",
+    "iOS",
+    "tooltip"
+  ],
+  "author": {
+    "name": "Osei Fortune",
+    "email": "fortune.osei@yahoo.com"
+  },
+  "bugs": {
+    "url": "https://github.com/triniwiz/nativescript-tooltip/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/triniwiz/nativescript-tooltip",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "tns-core-modules": "^3.4.1"
+  }
+}
