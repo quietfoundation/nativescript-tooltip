@@ -30,9 +30,10 @@ export class ToolTip {
     }
   }
   show() {
-    let config = this.config;
-    let view = this.view;
-    let containerView = this.containerView;
+    const config = this.config;
+    const view = this.view;
+    const tip = this.tip;
+    const containerView = this.containerView;
     let pos;
     switch (config.position) {
       case 'left':
@@ -52,46 +53,38 @@ export class ToolTip {
         break;
     }
 
-    if (config.viewType && config.viewType === 'native' && config.duration) {
-      if (!config.width) {
-        config.width = 400;
+    if (!config.width) {
+      config.width = 400;
+    }
+
+    if (config.viewType === 'native') {
+      if (config.duration) {
+        tip.showTextDirectionMaxWidthInViewFromFrameDuration(
+          config.text,
+          pos,
+          config.width,
+          containerView,
+          view.frame,
+          config.duration / 1000
+        );
+      } else {
+        tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView, view.frame);
       }
-      this.tip.showTextDirectionMaxWidthInViewFromFrameDuration(
-        config.text,
-        pos,
-        this.config.width,
-        containerView,
-        view.frame,
-        config.duration / 1000
-      );
-    } else if (config.viewType && config.viewType === 'native') {
-      if (!config.width) {
-        config.width = 400;
-      }
-      this.tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView, view.frame);
-    } else if (config.duration) {
-      if (!config.width) {
-        config.width = 400;
-      }
-      this.tip.showTextDirectionMaxWidthInViewFromFrameDuration(
-        config.text,
-        pos,
-        config.width,
-        containerView.ios,
-        view.ios.frame,
-        config.duration / 1000
-      );
     } else {
-      if (!config.width) {
-        config.width = 400;
+      const ios = view.ios;
+      const targetFrame = ios.convertRectToCoordinateSpace(ios.frame, containerView.ios);
+      if (config.duration) {
+        tip.showTextDirectionMaxWidthInViewFromFrameDuration(
+          config.text,
+          pos,
+          config.width,
+          containerView.ios,
+          targetFrame,
+          config.duration / 1000
+        );
+      } else {
+        tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView.ios, targetFrame);
       }
-      this.tip.showTextDirectionMaxWidthInViewFromFrame(
-        config.text,
-        pos,
-        config.width,
-        containerView.ios,
-        view.ios.frame
-      );
     }
   }
 

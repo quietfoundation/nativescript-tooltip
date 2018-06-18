@@ -25,6 +25,7 @@ var ToolTip = (function () {
     ToolTip.prototype.show = function () {
         var config = this.config;
         var view = this.view;
+        var tip = this.tip;
         var containerView = this.containerView;
         var pos;
         switch (config.position) {
@@ -44,29 +45,26 @@ var ToolTip = (function () {
                 pos = 0;
                 break;
         }
-        if (config.viewType && config.viewType === 'native' && config.duration) {
-            if (!config.width) {
-                config.width = 400;
-            }
-            this.tip.showTextDirectionMaxWidthInViewFromFrameDuration(config.text, pos, this.config.width, containerView, view.frame, config.duration / 1000);
+        if (!config.width) {
+            config.width = 400;
         }
-        else if (config.viewType && config.viewType === 'native') {
-            if (!config.width) {
-                config.width = 400;
+        if (config.viewType === 'native') {
+            if (config.duration) {
+                tip.showTextDirectionMaxWidthInViewFromFrameDuration(config.text, pos, config.width, containerView, view.frame, config.duration / 1000);
             }
-            this.tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView, view.frame);
-        }
-        else if (config.duration) {
-            if (!config.width) {
-                config.width = 400;
+            else {
+                tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView, view.frame);
             }
-            this.tip.showTextDirectionMaxWidthInViewFromFrameDuration(config.text, pos, config.width, containerView.ios, view.ios.frame, config.duration / 1000);
         }
         else {
-            if (!config.width) {
-                config.width = 400;
+            var ios = view.ios;
+            var targetFrame = ios.convertRectToCoordinateSpace(ios.frame, containerView.ios);
+            if (config.duration) {
+                tip.showTextDirectionMaxWidthInViewFromFrameDuration(config.text, pos, config.width, containerView.ios, targetFrame, config.duration / 1000);
             }
-            this.tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView.ios, view.ios.frame);
+            else {
+                tip.showTextDirectionMaxWidthInViewFromFrame(config.text, pos, config.width, containerView.ios, targetFrame);
+            }
         }
     };
     ToolTip.prototype.hide = function () {
