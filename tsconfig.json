@@ -15,8 +15,7 @@
     "noEmitOnError": false,
     "noImplicitAny": false,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "outdir": "dist"
+    "noFallthroughCasesInSwitch": true
   },
   "exclude": ["demo", "dist", "node_modules", "platforms"]
 }

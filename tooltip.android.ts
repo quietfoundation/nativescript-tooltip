@@ -5,7 +5,7 @@ export class ToolTip {
   private builder: any;
   private tip: any;
 
-  constructor(view: any, config: ToolTipConfig) {
+  constructor(view: any, _containerView: any, config: ToolTipConfig) {
     const id = Math.floor(Math.random() * 1000 + 1);
     this.builder = new it.sephiroth.android.library.tooltip.Tooltip.Builder(id);
 
@@ -36,12 +36,16 @@ export class ToolTip {
 
     if (config.duration) {
       this.builder.closePolicy(
-        new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy().insidePolicy(true, false).outsidePolicy(true, false),
+        new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy()
+          .insidePolicy(true, false)
+          .outsidePolicy(true, false),
         config.duration
       );
     } else {
       this.builder.closePolicy(
-        new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy().insidePolicy(true, false).outsidePolicy(true, false),
+        new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy()
+          .insidePolicy(true, false)
+          .outsidePolicy(true, false),
         java.lang.Integer.MAX_VALUE
       );
     }

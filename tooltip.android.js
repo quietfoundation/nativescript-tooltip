@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var app = require("tns-core-modules/application/application");
 var ToolTip = (function () {
-    function ToolTip(view, config) {
+    function ToolTip(view, _containerView, config) {
         var id = Math.floor(Math.random() * 1000 + 1);
         this.builder = new it.sephiroth.android.library.tooltip.Tooltip.Builder(id);
         var pos;
@@ -31,10 +31,14 @@ var ToolTip = (function () {
         }
         this.builder.text(config.text);
         if (config.duration) {
-            this.builder.closePolicy(new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy().insidePolicy(true, false).outsidePolicy(true, false), config.duration);
+            this.builder.closePolicy(new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy()
+                .insidePolicy(true, false)
+                .outsidePolicy(true, false), config.duration);
         }
         else {
-            this.builder.closePolicy(new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy().insidePolicy(true, false).outsidePolicy(true, false), java.lang.Integer.MAX_VALUE);
+            this.builder.closePolicy(new it.sephiroth.android.library.tooltip.Tooltip.ClosePolicy()
+                .insidePolicy(true, false)
+                .outsidePolicy(true, false), java.lang.Integer.MAX_VALUE);
         }
         if (config.fadeDuration) {
             this.builder.fadeDuration(config.fadeDuration);
